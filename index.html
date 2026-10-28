@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mario's Collision Center | Augusta, GA Auto Body & Collision Repair</title>
+<meta name="description" content="Mario's Collision Center in Augusta, GA. Expert collision repair, paint, body work, and detailing. 4.8★ from Google reviews. Honest work, fair prices, personal service from Mario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --red: #c41e3a;
+  --red-bright: #e63946;
+  --white: #f5f5f5;
+  --gray: #1a1a1a;
+  --muted: #888;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system_ui, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+h1, h2, h3, .logo-text { font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+a { color: var(--red-bright); text-decoration: none; }
+a:hover { color: #fff; }
+
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  background: rgba(10,10,10,0.85); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(196,30,58,0.3);
+  padding: 0.8rem 5%;
+  display: flex; justify-content: space-between; align-items: center;
+}
+nav .brand { font-weight: 700; font-size: 1.25rem; color: #fff; }
+nav .brand span { color: var(--red); }
+nav ul { display: flex; gap: 1.5rem; list-style: none; }
+nav a { color: var(--white); font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+nav a:hover { color: var(--red-bright); }
+.btn {
+  display: inline-block; background: var(--red); color: #fff; padding: 0.7rem 1.4rem;
+  border-radius: 4px; font-weight: 600; transition: all 0.25s; border: none; cursor: pointer;
+}
+.btn:hover { background: var(--red-bright); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(196,30,58,0.4); }
+.btn-outline { background: transparent; border: 2px solid var(--red); color: #fff; }
+.btn-outline:hover { background: var(--red); }
+
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  position: relative; text-align: center; padding: 6rem 5% 4rem;
+  background: radial-gradient(ellipse at center, #1a0a0a 0%, #000 70%);
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('https://img.carhq.org/d4/2507/2253367962023282.webp') center 20% / contain no-repeat;
+  opacity: 0.18; filter: grayscale(0.3);
+  animation: pulse 8s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 0.15; transform: scale(1); } 50% { opacity: 0.22; transform: scale(1.03); } }
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
+.hero h1 { font-size: clamp(2.8rem, 8vw, 5.5rem); line-height: 0.95; margin-bottom: 0.5rem; text-shadow: 0 4px 30px rgba(0,0,0,0.6); }
+.hero h1 span { color: var(--red); }
+.hero .tagline { font-size: 1.25rem; color: #ddd; margin: 1rem 0 1.5rem; font-weight: 300; }
+.stars { color: #ffc107; font-size: 1.1rem; margin-bottom: 1.5rem; letter-spacing: 2px; }
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+.section-title { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; }
+.section-title::after {
+  content: ''; display: block; width: 60px; height: 3px; background: var(--red); margin: 0.6rem auto 0;
+}
+.subtitle { text-align: center; color: var(--muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.about-text h2 { font-size: 2rem; margin-bottom: 1rem; }
+.about-text p { margin-bottom: 1rem; color: #ccc; }
+.about-photo { border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+.about-photo img { width: 100%; height: auto; display: block; transition: transform 0.4s; }
+.about-photo:hover img { transform: scale(1.04); }
+
+.services { background: linear-gradient(180deg, var(--black) 0%, #111 100%); }
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.service-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 1.8rem; transition: all 0.3s; backdrop-filter: blur(4px);
+}
+.service-card:hover { transform: translateY(-6px); border-color: var(--red); box-shadow: 0 15px 30px rgba(196,30,58,0.15); }
+.service-card h3 { font-size: 1.35rem; margin-bottom: 0.6rem; color: #fff; }
+.service-card p { color: #aaa; font-size: 0.95rem; }
+
+.work-photo { margin: 2rem auto; max-width: 800px; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+.work-photo img { width: 100%; display: block; }
+
+.testimonials { background: #0d0d0d; }
+.review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.review {
+  background: rgba(255,255,255,0.04); border-left: 3px solid var(--red); padding: 1.5rem; border-radius: 0 8px 8px 0;
+}
+.review p { font-style: italic; color: #ddd; margin-bottom: 0.8rem; }
+.review .name { font-weight: 600; color: #fff; font-size: 0.9rem; }
+.review .stars { font-size: 0.9rem; margin-bottom: 0.4rem; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.hours, .location { background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 12px; }
+.hours h3, .location h3 { margin-bottom: 1rem; font-size: 1.5rem; }
+.hours li, .location p { margin-bottom: 0.5rem; color: #ccc; list-style: none; }
+.map-embed { margin-top: 1.5rem; border-radius: 8px; overflow: hidden; height: 250px; }
+.map-embed iframe { width: 100%; height: 100%; border: 0; }
+
+footer { background: #050505; padding: 2rem 5%; text-align: center; border-top: 1px solid #222; color: var(--muted); font-size: 0.9rem; }
+footer a { color: var(--red); }
+
+@media (max-width: 768px) {
+  .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  nav ul { display: none; }
+  .hero h1 { font-size: 2.6rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">MARIO'S <span>COLLISION</span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:7067381093" class="btn">Call Now</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>MARIO'S<br><span>COLLISION CENTER</span></h1>
+    <p class="tagline">Honest Collision Repair & Auto Body Work in Augusta, GA</p>
+    <div class="stars">★★★★★ 4.8 from 36+ Google Reviews</div>
+    <div class="hero-ctas">
+      <a href="tel:7067381093" class="btn">Call (706) 738-1093</a>
+      <a href="https://maps.app.goo.gl/ukLvcmJ3ci3ApCS77" target="_blank" class="btn btn-outline">Get Directions</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <h2 class="section-title">Meet Mario</h2>
+  <p class="subtitle">Personal service, quality work, fair prices. That's the difference.</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Trusted Local Collision Experts</h2>
+      <p>Mario's Collision Center is a well-known auto body and collision shop in Augusta, GA. Customers consistently highlight Mario's humble, kind approach and the quality of the work his crew delivers.</p>
+      <p>From minor dents to full collision repairs (including a Tesla finished in just over a day), the shop is praised for transparency, competitive pricing, and results that look better than expected. One reviewer called the location "car repair paradise" once you make it down the road.</p>
+      <p>Whether it's body work, paint matching, detailing, or helping with emissions issues, Mario and the team treat customers like people, not just jobs.</p>
+    </div>
+    <div class="about-photo">
+      <img src="https://img.carhq.org/d4/2507/2253367962023282.webp" alt="Inside Mario's Collision Center shop in Augusta, GA">
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <h2 class="section-title">What We Do</h2>
+  <p class="subtitle">Full-service body, paint, and collision repair for Augusta and the CSRA.</p>
+  <div class="service-grid">
+    <div class="service-card">
+      <h3>Collision Repair</h3>
+      <p>Minor dents to major accident damage. Structural and cosmetic restoration focused on safety and appearance.</p>
+    </div>
+    <div class="service-card">
+      <h3>Body & Trim</h3>
+      <p>Panel work, dent removal, rust repair, and trim. Restoring your vehicle's look and integrity.</p>
+    </div>
+    <div class="service-card">
+      <h3>Paint & Refinishing</h3>
+      <p>Professional color matching and durable finishes that blend seamlessly with the original paint.</p>
+    </div>
+    <div class="service-card">
+      <h3>Detailing</h3>
+      <p>Full detailing and cleaning to make the finished repair look showroom-ready.</p>
+    </div>
+    <div class="service-card">
+      <h3>Emissions Repair</h3>
+      <p>Registered Georgia State Emissions Repair Facility. Diagnostics and fixes for failed emissions tests.</p>
+    </div>
+    <div class="service-card">
+      <h3>Insurance Work</h3>
+      <p>Experience working with insurance claims. Clear communication so the process stays straightforward.</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <h2 class="section-title">Inside the Shop</h2>
+  <p class="subtitle">Real work from Mario's Collision Center in Augusta.</p>
+  <div class="work-photo">
+    <img src="https://img.carhq.org/d4/2507/2253367962023282.webp" alt="Vehicle in the shop at Mario's Collision Center">
+  </div>
+  <p style="text-align:center; color:#aaa; margin-top:1rem;">Photo from the shop's Google listing. Quality work on a variety of vehicles, including trucks and a Tesla.</p>
+</section>
+
+<section id="reviews" class="testimonials">
+  <h2 class="section-title">What Customers Say</h2>
+  <p class="subtitle">Real Google reviews. 4.7–4.8 average across 36+ ratings.</p>
+  <div class="review-grid">
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p>"Mario was the most humble and kind man around. The work he did on our Tesla was incredible... He took a little over a day to knock it out. The value of his work was worth more than what he charged."</p>
+      <div class="name">— Louie Ponce</div>
+    </div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p>"Mario & his crew are the best I’ve dealt with EVER! Great work from a good man at a great price!"</p>
+      <div class="name">— Dennis Martin</div>
+    </div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p>"I wished I lived here so I could have access to this place all the time. Their kindness is unmatched... take the dirt road to car repair paradise."</p>
+      <div class="name">— TiffanyB</div>
+    </div>
+    <div class="review">
+      <div class="stars">★★★★★</div>
+      <p>"Mario did an excellent job in repairing the auto body damage to my car. Can't even tell where it was damaged, very reasonable price too!"</p>
+      <div class="name">— Jim L.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">Visit or Call</h2>
+  <div class="contact-grid">
+    <div class="hours">
+      <h3>Hours</h3>
+      <ul>
+        <li>Monday – Friday: 8:00 AM – 6:00 PM</li>
+        <li>Saturday: Closed</li>
+        <li>Sunday: Closed</li>
+      </ul>
+      <p style="margin-top:1.5rem;"><strong>Phone:</strong> <a href="tel:7067381093">(706) 738-1093</a></p>
+      <p style="margin-top:1rem;"><a href="tel:7067381093" class="btn">Call Now</a></p>
+    </div>
+    <div class="location">
+      <h3>Location</h3>
+      <p><strong>Mario's Collision Center</strong><br>
+      2298 Walden Dr<br>
+      Augusta, GA 30904</p>
+      <p style="margin-top:1rem;">Off the main road — look for the access road. Customers note it's worth the short drive.</p>
+      <div class="map-embed">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.0!2d-82.0308642!3d33.4549062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f9cde4adfb5dcb%3A0x55de69d40e276317!2sMario's%20Collision%20Center!5e0!3m2!1sen!2sus!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <p style="margin-top:1rem;"><a href="https://maps.app.goo.gl/ukLvcmJ3ci3ApCS77" target="_blank" class="btn btn-outline">Open in Google Maps</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; Mario's Collision Center · Augusta, GA · (706) 738-1093</p>
+  <p style="margin-top:0.5rem;">Website by <a href="https://www.rgwebd.com" target="_blank">RGWebD</a> · Reese Gets You Ranked</p>
+</footer>
+
+</body>
+</html>
